@@ -1,1 +1,186 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITI - ઓછા ટકા હાજરી પત્ર જનરેટર</title>
+    <style>
+        body { font-family: 'Shruti', Arial, sans-serif; margin: 15px; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #1a73e8; margin-bottom: 20px; }
+        .form-section { background: #f9fbfd; padding: 15px; border-radius: 6px; border: 1px solid #dcdcdc; margin-bottom: 15px; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        button { background-color: #1a73e8; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; }
+        button:hover { background-color: #1557b0; }
+        
+        /* Print Styles - મોબાઈલ અને પ્રિન્ટ માટે પરફેક્ટ સેટિંગ */
+        @media print {
+            body { background: white; margin: 0; }
+            .no-print { display: none !important; }
+            .letter-page { page-break-after: always; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        }
+        .letter-box { border-bottom: 2px dashed #bbb; padding-bottom: 15px; margin-bottom: 15px; font-size: 13px; line-height: 1.6; }
+        .letter-box:last-child { border-bottom: none; }
+        .header-right { text-align: right; }
+        .preview-box { background: white; padding: 20px; margin-top: 20px; border: 1px solid #ccc; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container no-print">
+    <h2>ITI - ઓછા ટકા હાજરી પત્ર જનરેટર</h2>
+    
+    <!-- પ્રથમ વિદ્યાર્થી -->
+    <div class="form-section">
+        <h3>વિદ્યાર્થી ૧ (ઉપરનો ભાગ)</h3>
+        <div class="form-group">
+            <label>રોલ નંબર (Roll No) દાખલ કરો અથવા પસંદ કરો:</label>
+            <input type="text" id="roll1" placeholder="દા.ત. 101" oninput="fetchStudentData(1)">
+        </div>
+        <div class="form-group">
+            <label>નામ:</label>
+            <input type="text" id="name1" readonly style="background: #e9ecef;">
+        </div>
+        <div class="form-group">
+            <label>સરનામું:</label>
+            <input type="text" id="address1" readonly style="background: #e9ecef;">
+        </div>
+        <div class="form-group">
+            <label>ટ્રેડ અને બેચ:</label>
+            <input type="text" id="trade_batch1" readonly style="background: #e9ecef;">
+        </div>
+        <div class="row" style="display: flex; gap: 10px;">
+            <div class="form-group" style="flex: 1;">
+                <label>ચાલુ મહિનો (Attendance Month):</label>
+                <input type="text" id="month1" value="જૂન">
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label>હાજરીના ટકા (Percentage):</label>
+                <input type="text" id="pct1" placeholder="દા.ત. 62%">
+            </div>
+        </div>
+    </div>
+
+    <!-- બીજો વિદ્યાર્થી (વૈકલ્પિક) -->
+    <div class="form-section">
+        <h3>વિદ્યાર્થી ૨ (નીચેનો ભાગ - જો બીજો ન જોઈએ તો ખાલી રાખો)</h3>
+        <div class="form-group">
+            <label>રોલ નંબર (Roll No) દાખલ કરો:</label>
+            <input type="text" id="roll2" placeholder="દા.ત. 102" oninput="fetchStudentData(2)">
+        </div>
+        <div class="form-group">
+            <label>નામ:</label>
+            <input type="text" id="name2" readonly style="background: #e9ecef;">
+        </div>
+        <div class="form-group">
+            <label>સરનામું:</label>
+            <input type="text" id="address2" readonly style="background: #e9ecef;">
+        </div>
+        <div class="form-group">
+            <label>ટ્રેડ અને બેચ:</label>
+            <input type="text" id="trade_batch2" readonly style="background: #e9ecef;">
+        </div>
+        <div class="row" style="display: flex; gap: 10px;">
+            <div class="form-group" style="flex: 1;">
+                <label>ચાલુ મહિનો (Attendance Month):</label>
+                <input type="text" id="month2" value="જૂન">
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label>હાજરીના ટકા (Percentage):</label>
+                <input type="text" id="pct2" placeholder="દા.ત. 58%">
+            </div>
+        </div>
+    </div>
+
+    <button onclick="generateLetters()">પત્ર બનાવો અને પ્રિન્ટ કરો</button>
+</div>
+
+<!-- પ્રિન્ટ પ્રિવ્યુ એરિયા -->
+<div id="printArea" class="preview-box"></div>
+
+<script>
+    // અહીં તમારો એક્સેલ ડેટાબેઝ (JSON સ્વરૂપે) મૂક્યો છે. તમે આમાં તમારા બધા વિદ્યાર્થીઓ ઉમેરી શકો છો.
+    const database = [
+        { roll: "101", name: "માનસભાઈ ધર્મેશભાઈ વાસવા", address: "પદ્માવતી સોસાયટી પ્રાથમિક શાળા અંકલેશ્વર ૩૯૩૦૦૧", trade: "Mechanic Diesel", batch: "84 A", examYear: "૨૬", instructor: "યુવરાજસિંહ કે. કોસામિયા" },
+        { roll: "102", name: "સુજલભાઈ રમેશભાઈ રાઠોડ", address: "નવીનાગરી ધવાટ ધવાટ ૩૯૧૨૧૦", trade: "Mechanic Diesel", batch: "84 A", examYear: "૨૬", instructor: "યુવરાજસિંહ કે. કોસામિયા" },
+        { roll: "103", name: "સિદ્ધાર્થભાઈ બળવંતભાઈ પરમાર", address: "કોંધ કોંધ કોંધ ૩૯૩૦૦૧", trade: "Mechanic Diesel", batch: "84 A", examYear: "૨૬", instructor: "યુવરાજસિંહ કે. કોસામિયા" }
+    ];
+
+    function fetchStudentData(boxNum) {
+        let rollVal = document.getElementById("roll" + boxNum).value.trim();
+        let student = database.find(s => s.roll === rollVal);
+
+        if (student) {
+            document.getElementById("name" + boxNum).value = student.name;
+            document.getElementById("address" + boxNum).value = student.address;
+            document.getElementById("trade_batch1" in window ? "trade_batch" + boxNum : "trade_batch" + boxNum).value = student.trade + " (બેચ: " + student.batch + ")";
+        } else {
+            document.getElementById("name" + boxNum).value = "";
+            document.getElementById("address" + boxNum).value = "";
+            document.getElementById("trade_batch" + boxNum).value = "";
+        }
+    }
+
+    function getLetterHTML(s, month, pct) {
+        let currentDate = new Date().toLocaleDateString('gu-IN');
+        return `
+            <div class="header-right">
+                જા.નં./ઔ. તા. સંસ્થા/તાલીમ/ઓછા ટકા/<br>
+                આચાર્યશ્રીની કચેરી,<br>
+                ઔદ્યોગિક તાલીમ સંસ્થા, અંકલેશ્વર<br>
+                તા. ${currentDate}
+            </div>
+            <p><strong>પ્રતિ,</strong><br>શ્રી ${s.name}<br>${s.address}</p>
+            <p><strong>શ્રીમાન,</strong><br>
+            આથી આપને જણાવવાનું કે તમારા ચિ. ${s.name} અત્રેની સંસ્થામાં ટ્રેડ ${s.trade} બેચ નં. ${s.batch} માં અભ્યાસ કરે છે. અને તેઓની હાજરી ૮૦% કરતાં ઓછી થાય છે. જેથી તેને જુલાઈ ૨૦${s.examYear} માં થનારી અખિલ ભારતીય વ્યવસાય કસોટીમાં બેસવા દેવામાં આવશે નહિ. સંસ્થામાંથી તેઓને વારંવાર સુચના આપવામાં આવે છે. છતાં તેઓ વારંવાર ગેરહાજર રહે છે. તેથી તેમની હાજરી ૮૦% કરતાં ઓછી થાય છે. હાજરીના ટકા જો જુલાઈ ૨૦${s.examYear} સુધીમાં ૮૦% થશે તોજ તેને જુલાઈ ૨૦${s.examYear} ની પરીક્ષામાં બેસવા દેવાની મંજુરી આપવામાં આવશે જેની નોંધ લેવા વિનંતી.</p>
+            <p><strong>નોંધ :-</strong> ${month} સુધીમાં હાજરી ${pct} થાય છે.</p>
+            <table width="100%" style="margin-top: 15px;">
+                <tr>
+                    <td>ટ્રેડ ઈન્સ્ટ્ર.</td>
+                    <td align="center">ફો. ઈ.</td>
+                    <td align="right">આચાર્ય / ફોરમેન<br>ઔદ્યોગિક તાલીમ સંસ્થા, અંકલેશ્વર</td>
+                </tr>
+            </table>
+            <p>નકલ રવાના :- શ્રી ${s.instructor} સુ. ઈ.</p>
+        `;
+    }
+
+    function generateLetters() {
+        let r1 = document.getElementById("roll1").value.trim();
+        let s1 = database.find(s => s.roll === r1);
+
+        if (!s1) {
+            alert("કૃપા કરીને વિદ્યાર્થી ૧ નો સાચો રોલ નંબર નાખો!");
+            return;
+        }
+
+        let m1 = document.getElementById("month1").value || "જૂન";
+        let p1 = document.getElementById("pct1").value || "૦%";
+
+        let r2 = document.getElementById("roll2").value.trim();
+        let s2 = r2 !== "" ? database.find(s => s.roll === r2) : s1; // જો બીજો ન નાખો તો પહેલો જ રિપીટ થશે
+        let m2 = document.getElementById("month2").value || "જૂન";
+        let p2 = document.getElementById("pct2").value || p1;
+
+        let htmlContent = `
+            <div class="letter-page">
+                <div class="letter-box">${getLetterHTML(s1, m1, p1)}</div>
+                <hr style="border-top: 1px dashed black; margin: 10px 0;">
+                <div class="letter-box">${getLetterHTML(s2, m2, p2)}</div>
+            </div>
+        `;
+
+        let printArea = document.getElementById("printArea");
+        printArea.innerHTML = htmlContent;
+        printArea.style.display = "block";
+        
+        // મોબાઈલ કે પીસીમાં પ્રિન્ટ ડાયલોગ ખોલશે
+        window.print();
+    }
+</script>
+
+</body>
+</html>
 
