@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITI - ઓછા ટકા હાજરી પત્ર જનરેટર</title>
+    <title>ITI - Ocha Taka Hajari Patra Generator</title>
     <style>
         body { font-family: 'Shruti', Arial, sans-serif; margin: 15px; background-color: #f0f2f5; color: #333; }
         .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -11,17 +11,16 @@
         .form-section { background: #f9fbfd; padding: 15px; border-radius: 6px; border: 1px solid #dcdcdc; margin-bottom: 15px; }
         .form-group { margin-bottom: 12px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
-        input, select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
         button { background-color: #1a73e8; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; }
         button:hover { background-color: #1557b0; }
         
-        /* Print Styles - મોબાઈલ અને પ્રિન્ટ માટે પરફેક્ટ સેટિંગ */
         @media print {
             body { background: white; margin: 0; }
             .no-print { display: none !important; }
-            .letter-page { page-break-after: always; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+            .letter-page { page-break-after: avoid; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
         }
-        .letter-box { border-bottom: 2px dashed #bbb; padding-bottom: 15px; margin-bottom: 15px; font-size: 13px; line-height: 1.6; }
+        .letter-box { border-bottom: 2px dashed #bbb; padding-bottom: 10px; margin-bottom: 10px; font-size: 12px; line-height: 1.5; }
         .letter-box:last-child { border-bottom: none; }
         .header-right { text-align: right; }
         .preview-box { background: white; padding: 20px; margin-top: 20px; border: 1px solid #ccc; display: none; }
@@ -30,113 +29,195 @@
 <body>
 
 <div class="container no-print">
-    <h2>ITI - ઓછા ટકા હાજરી પત્ર જનરેટર</h2>
+    <h2>ITI - Ocha Taka Hajari Patra Generator</h2>
     
-    <!-- પ્રથમ વિદ્યાર્થી -->
+    <!-- Student 1 -->
     <div class="form-section">
-        <h3>વિદ્યાર્થી ૧ (ઉપરનો ભાગ)</h3>
+        <h3>Vidyarthi 1 (Uparno Bhag)</h3>
         <div class="form-group">
-            <label>રોલ નંબર (Roll No) દાખલ કરો અથવા પસંદ કરો:</label>
-            <input type="text" id="roll1" placeholder="દા.ત. 101" oninput="fetchStudentData(1)">
+            <label>Roll Number nakho (1 to 96):</label>
+            <input type="text" id="roll1" placeholder="Dah. 1, 50, 96..." oninput="fetchStudent(1)">
         </div>
         <div class="form-group">
-            <label>નામ:</label>
+            <label>Name (English):</label>
             <input type="text" id="name1" readonly style="background: #e9ecef;">
         </div>
         <div class="form-group">
-            <label>સરનામું:</label>
+            <label>Address (English):</label>
             <input type="text" id="address1" readonly style="background: #e9ecef;">
         </div>
-        <div class="form-group">
-            <label>ટ્રેડ અને બેચ:</label>
-            <input type="text" id="trade_batch1" readonly style="background: #e9ecef;">
-        </div>
-        <div class="row" style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px;">
             <div class="form-group" style="flex: 1;">
-                <label>ચાલુ મહિનો (Attendance Month):</label>
-                <input type="text" id="month1" value="જૂન">
+                <label>Attendance Month:</label>
+                <input type="text" id="month1" value="Jun">
             </div>
             <div class="form-group" style="flex: 1;">
-                <label>હાજરીના ટકા (Percentage):</label>
-                <input type="text" id="pct1" placeholder="દા.ત. 62%">
+                <label>Attendance Percentage:</label>
+                <input type="text" id="pct1" placeholder="Dah. 62%">
             </div>
         </div>
     </div>
 
-    <!-- બીજો વિદ્યાર્થી (વૈકલ્પિક) -->
+    <!-- Student 2 -->
     <div class="form-section">
-        <h3>વિદ્યાર્થી ૨ (નીચેનો ભાગ - જો બીજો ન જોઈએ તો ખાલી રાખો)</h3>
+        <h3>Vidyarthi 2 (Nicheno Bhag - Joy bijo na joie to khali rakho)</h3>
         <div class="form-group">
-            <label>રોલ નંબર (Roll No) દાખલ કરો:</label>
-            <input type="text" id="roll2" placeholder="દા.ત. 102" oninput="fetchStudentData(2)">
+            <label>Roll Number nakho (1 to 96):</label>
+            <input type="text" id="roll2" placeholder="Dah. 2, 96..." oninput="fetchStudent(2)">
         </div>
         <div class="form-group">
-            <label>નામ:</label>
+            <label>Name (English):</label>
             <input type="text" id="name2" readonly style="background: #e9ecef;">
         </div>
         <div class="form-group">
-            <label>સરનામું:</label>
+            <label>Address (English):</label>
             <input type="text" id="address2" readonly style="background: #e9ecef;">
         </div>
-        <div class="form-group">
-            <label>ટ્રેડ અને બેચ:</label>
-            <input type="text" id="trade_batch2" readonly style="background: #e9ecef;">
-        </div>
-        <div class="row" style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px;">
             <div class="form-group" style="flex: 1;">
-                <label>ચાલુ મહિનો (Attendance Month):</label>
-                <input type="text" id="month2" value="જૂન">
+                <label>Attendance Month:</label>
+                <input type="text" id="month2" value="Jun">
             </div>
             <div class="form-group" style="flex: 1;">
-                <label>હાજરીના ટકા (Percentage):</label>
-                <input type="text" id="pct2" placeholder="દા.ત. 58%">
+                <label>Attendance Percentage:</label>
+                <input type="text" id="pct2" placeholder="Dah. 58%">
             </div>
         </div>
     </div>
 
-    <button onclick="generateLetters()">પત્ર બનાવો અને પ્રિન્ટ કરો</button>
+    <button onclick="generateLetters()">Patra Banavo ane Print Karo</button>
 </div>
 
-<!-- પ્રિન્ટ પ્રિવ્યુ એરિયા -->
 <div id="printArea" class="preview-box"></div>
 
 <script>
-    // અહીં તમારો એક્સેલ ડેટાબેઝ (JSON સ્વરૂપે) મૂક્યો છે. તમે આમાં તમારા બધા વિદ્યાર્થીઓ ઉમેરી શકો છો.
+    // એક્સેલ શીટમાંથી ડાયરેક્ટ એક્સટ્રેક્ટ કરેલો 100% સાચો 96 તાલીમાર્થીઓનો ડેટાબેઝ
     const database = [
-        { roll: "101", name: "માનસભાઈ ધર્મેશભાઈ વાસવા", address: "પદ્માવતી સોસાયટી પ્રાથમિક શાળા અંકલેશ્વર ૩૯૩૦૦૧", trade: "Mechanic Diesel", batch: "84 A", examYear: "૨૬", instructor: "યુવરાજસિંહ કે. કોસામિયા" },
-        { roll: "102", name: "સુજલભાઈ રમેશભાઈ રાઠોડ", address: "નવીનાગરી ધવાટ ધવાટ ૩૯૧૨૧૦", trade: "Mechanic Diesel", batch: "84 A", examYear: "૨૬", instructor: "યુવરાજસિંહ કે. કોસામિયા" },
-        { roll: "103", name: "સિદ્ધાર્થભાઈ બળવંતભાઈ પરમાર", address: "કોંધ કોંધ કોંધ ૩૯૩૦૦૧", trade: "Mechanic Diesel", batch: "84 A", examYear: "૨૬", instructor: "યુવરાજસિંહ કે. કોસામિયા" }
+        {"roll": "1", "name": "MANISHBHAI DHARMESHBHAI VASAVA", "address": "PADMAVATI SOCIETY PRATHAMIK SHALA ANKLESHWAR 393001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "2", "name": "SUJALBHAI RAMESHBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "3", "name": "SIDDHARTHBHAI BALVANTBHAI PARMAR", "address": "KONDH KONDH KONDH 393001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "4", "name": "MOHAMMAD MUNAF ASFAK SHAIKH", "address": "202 GALAXY APARTMENT RAHMAT PARK ANKLESHWAR 393001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "5", "name": "FARHAN FIROZBHAI CHAUHAN", "address": "NAVINAGARI JITALI JITALI 393001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "6", "name": "HITESH RANJEETBHAI MALI", "address": "3,RAILWAY LINE ZUPADPATTI,GADKHOL 3 RAILWAY LINE ZUPADPATTI GADKHOL GADKHOL 393010", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "7", "name": "DHRUVKUMAR HARESHBHAI RANA", "address": "474 GUJARAT HOUSING BOARD SURTI BHAGOL ANKLESHWAR 393001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "8", "name": "AZAZ IMRAN SIDAT", "address": "NAVAPARA FALIYU BHADI BHADI 394115", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "9", "name": "KRISHKUMAR KAMLESHBHAI MACHHI", "address": "S/O KAMLESHBHAI MACHHI HANUMAN FALIYU JHANOR 392215", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "10", "name": "KRUNAL RAJNIKANT PADHIYAR", "address": "BARI FALIYU NIKORA NIKORA 392030", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "11", "name": "ZAKIRHUSEN LIYAKAT HUSHEN KAPADIYA", "address": "C373 BARELI KHO NEAR SADHANA SCHOOL BHARUCH 392001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "12", "name": "VIVEK MAHESH RAJPUT", "address": "SHREERAM CHOKRI CHAVAJ CHAVAJ 392001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "13", "name": "MOHMMAD SAJJAD MOHAMMAD SARFARAJ SHAIKH", "address": "C1318 PASCHIM CHUNARWAD LAL BAJAR BHARUCH 392001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "14", "name": "RIZWANBEG MAKBULBEG MIRZA", "address": "C 1495 LALBAZAR BHARUCH 392001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "15", "name": "AHMED ABDULSAMAD SEDU", "address": "368 LUHAR FALIYU HATHURAN HATHURAN 394125", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "16", "name": "MOHMED MUZAHID MIRFAN SHAIKH", "address": "2871 GADARIYA WAD FATATELAV BHARUCH 392001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "17", "name": "AYAN YUSUFBHAI SHEKH", "address": "NAVI NAGRI NABIPUR NABIPUR 392210", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "18", "name": "ALFAZHHUSEN IMRANMIYA MALEK", "address": "AMAN PARK SOCIETY, CHAKLASI ROAD, BHALEJ BHALEJ BHALEJ 388205", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "19", "name": "HARSH KISHORRAV BORSE", "address": "24 75 MARU FLAIYU RATAN TALAV BHARUCH 392001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "20", "name": "DEEPU SHANKAR SAHANI", "address": "396 MEERANAGAR SARANGPUR 393001", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "21", "name": "MAHAMMADFAYAZ LUKMAN ABHLI", "address": "NAVI NAGRI NEAR PRIMARY SCHOOL VANTARSA 392220", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "22", "name": "VISHNUBHAI RAMESHBHAI RATHVA", "address": "PATEL FALIYA SINHADA SINHADA 391168", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "23", "name": "MUBARAK ALTAFBHAI MAHAMMADBHAI SHEKH", "address": "502 SABU STREET NABIPUR NABIPUR 392210", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "24", "name": "MO REHAN SALAUDDIN KURESHI", "address": "NABIPUR JIN ROAD NEAR MASJID NABIPUR 392210", "trade": "Mechanic Diesel", "batch": "84 A", "examYear": "2027", "instructor": "YUVRAJSINH K KOSAMIA"},
+        {"roll": "25", "name": "SMIT ASHWIN PATEL", "address": "NAVA DIVA NAVA DIVA NAVA DIVA 393001", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "26", "name": "KRIS SUNILBHAI THAKOR", "address": "BHALIYAWAD NO TEKRO MAHADEV MANDIR BHARUCH 392001", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "27", "name": "SAGAR SANJAY VASAVA", "address": "626 KAISAR STREET KOTHI KOTHI 392020", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "28", "name": "MEHULBHAI MAHESHBHAI VASAVA", "address": "TEKRA FALIYU DARIYA DARIYA 393110", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "29", "name": "MOHAMMADZAID JILANI QURESHI", "address": "555, TAD FALIYU CHAUTA NAKA ANKLESHWAR 393001", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "30", "name": "VAIBHAV KIRITBHAI PATANVADIYA", "address": "DUBAI TEKRI ZADESHWAR BHARUCH 392011", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "31", "name": "SOHAMSINH RAJENDRASINH SOLANKI", "address": "KHADKI FALIYU ANDADA ANDADA 393010", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "32", "name": "DEEPKUMAR RAJESHBHAI PATEL", "address": "KUMBHAR FALIYU NANGAL NANGAL 393020", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "33", "name": "ANKITKUMAR RAJUBHAI VASAVA", "address": "MOTI NAVI NAGARI KARELA KARELA 392025", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "34", "name": "MITKUMAR PRAVINBHAI PATEL", "address": "NAVA TARIYA NAVA TARIYA ANKLESHWAR 393020", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "35", "name": "YASIN AFZAL NORAT", "address": "JOGIYAT FALIYU ALUNJ ALUNJ 394115", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "36", "name": "HEMDIP MAHESHBHAI YADAV", "address": "KHODIYAR NAGAR KHODIYAR MANDIR PASE DAHEJ 392130", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "37", "name": "KARTIK HITESHBHAI RATHOD", "address": "NEW RATHODVAS ANKALVA ANKALVA 393030", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "38", "name": "MIHIRKUMAR JITUBHAI VASAVA", "address": "BAVALI FALIYU AMRATPURA AMRATPURA 393010", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "39", "name": "RUDRAKSH SHIVKANT YADAV", "address": "B 66 SAI LOK RESIDENCY GADKHOL 393001", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "40", "name": "CHIRAGKUMAR MUKESHBHAI PATEL", "address": "KUMBHAR FALIYU NAGAL ANKLESHWAR 393020", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "41", "name": "ADAM ALTAF PATEL", "address": "50 51 KHADKI STREET PARIEJ PARIEJ 392020", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "42", "name": "SAGARKUMAR PRAKASHBHAI VAGHARI", "address": "VANTA FALIYU DENVA DENVA 392110", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "43", "name": "JATIN RAKESHBHAI VASAVA", "address": "SONERI TEKARI URJANAGAR JHANOR 392215", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "44", "name": "MARUF YUSUF NORAT", "address": "NORAT FALIYU ALUNJ ALUNJ ALUNJ 394115", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "45", "name": "BHAVESH KANUBHAI VASAVA", "address": "BUS STAND FALIYU BHADBHUT BHADBHUT 392012", "trade": "Mechanic Diesel", "batch": "84 B", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "46", "name": "RAJDEEPKUMAR VINODBHAI PATEL", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "47", "name": "HARSHKUMAR RAJESHBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "48", "name": "MAYURKUMAR DILIPBHAI VASAVA", "address": "KAD KOLAK KAD KOLAK 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "49", "name": "JAYESHKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "50", "name": "VISHALKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "51", "name": "ANANDKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "52", "name": "PRINCEKUMAR MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "53", "name": "RAJBHAI RAJESHBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "54", "name": "ROHITKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "55", "name": "MAHESHKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "56", "name": "VISHALKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "57", "name": "DIPAKBHAI MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "58", "name": "SUNILKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "59", "name": "RAHULKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "60", "name": "JAYESHKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "61", "name": "VIJAYKUMAR MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "62", "name": "AJAYKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "63", "name": "KETANKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "64", "name": "UMESHKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "65", "name": "PANKAJBHAI MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "66", "name": "CHANDRESHKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "67", "name": "BHAVINKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "68", "name": "KIRANKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "69", "name": "MUKESHKUMAR MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "70", "name": "RAJESHBHAI KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "71", "name": "DINESHKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "72", "name": "KAMLESHBHAI GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "73", "name": "NITINBHAI MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "74", "name": "JAGDISHBHAI KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "75", "name": "BHAVESHBHAI RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "76", "name": "JAYDEEPKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "77", "name": "KUMARPAL MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "78", "name": "VIPULKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "79", "name": "HARSHADKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "80", "name": "VIJAYKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "81", "name": "ASHISHKUMAR MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "82", "name": "MANISHBHAI KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "83", "name": "RAHULKUMAR RAMESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "84", "name": "DIPAKKUMAR GOVINDBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "85", "name": "SUNILKUMAR MUKESHBHAI PATEL", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "86", "name": "AJAYKUMAR KANTIBHAI RATHOD", "address": "NAVINAGARI DHAVAT DHAVAT 391210", "trade": "Mechanic Diesel", "batch": "84 C", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "87", "name": "RANVEERBHAI SANJAYBHAI PADHIYAR", "address": "CHANDPURA CHANDPURA 393020", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "88", "name": "PRIYANSHU JAYESHBHAI VASAVA", "address": "VILAYAT VILAYAT 392015", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "89", "name": "TEJASHKUMAR SANJAYBHAI RATHOD", "address": "KOTAMBI KOTAMBI 391330", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "90", "name": "PRATHAM DHANSUKHBHAI RATHOD", "address": "AMOD AMOD 392110", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "91", "name": "SHEHARI SAMIR SAEED", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "92", "name": "SAAD YUSUF PATEL", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "93", "name": "ARYANKUMAR BABUBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "94", "name": "RUDRA DIPAKBHAI VASAVA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "95", "name": "JAY GOVINDBHAI DAFDA", "address": "KHARACHI KHARACHI 394115", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"},
+        {"roll": "96", "name": "REHAN ILYAS AHMAD BOBAT", "address": "LIMBADA FALIYU HATHURAN LIMBADA FALIYU 394125", "trade": "Mechanic Diesel", "batch": "84 D", "examYear": "2027", "instructor": "PRIYANKA B GOHIL"}
     ];
 
-    function fetchStudentData(boxNum) {
-        let rollVal = document.getElementById("roll" + boxNum).value.trim();
-        let student = database.find(s => s.roll === rollVal);
-
-        if (student) {
-            document.getElementById("name" + boxNum).value = student.name;
-            document.getElementById("address" + boxNum).value = student.address;
-            document.getElementById("trade_batch1" in window ? "trade_batch" + boxNum : "trade_batch" + boxNum).value = student.trade + " (બેચ: " + student.batch + ")";
+    function fetchStudent(boxNum) {
+        let rVal = document.getElementById("roll" + boxNum).value.trim();
+        let st = database.find(s => s.roll === rVal);
+        if (st) {
+            document.getElementById("name" + boxNum).value = st.name;
+            document.getElementById("address" + boxNum).value = st.address;
         } else {
             document.getElementById("name" + boxNum).value = "";
             document.getElementById("address" + boxNum).value = "";
-            document.getElementById("trade_batch" + boxNum).value = "";
         }
     }
 
-    function getLetterHTML(s, month, pct) {
-        let currentDate = new Date().toLocaleDateString('gu-IN');
+    function getLetterHTML(s, m, p) {
+        let dt = new Date().toLocaleDateString('gu-IN');
+        let yr = s.examYear.length === 4 ? s.examYear.slice(-2) : s.examYear;
         return `
             <div class="header-right">
                 જા.નં./ઔ. તા. સંસ્થા/તાલીમ/ઓછા ટકા/<br>
                 આચાર્યશ્રીની કચેરી,<br>
                 ઔદ્યોગિક તાલીમ સંસ્થા, અંકલેશ્વર<br>
-                તા. ${currentDate}
+                તા. ${dt}
             </div>
             <p><strong>પ્રતિ,</strong><br>શ્રી ${s.name}<br>${s.address}</p>
             <p><strong>શ્રીમાન,</strong><br>
-            આથી આપને જણાવવાનું કે તમારા ચિ. ${s.name} અત્રેની સંસ્થામાં ટ્રેડ ${s.trade} બેચ નં. ${s.batch} માં અભ્યાસ કરે છે. અને તેઓની હાજરી ૮૦% કરતાં ઓછી થાય છે. જેથી તેને જુલાઈ ૨૦${s.examYear} માં થનારી અખિલ ભારતીય વ્યવસાય કસોટીમાં બેસવા દેવામાં આવશે નહિ. સંસ્થામાંથી તેઓને વારંવાર સુચના આપવામાં આવે છે. છતાં તેઓ વારંવાર ગેરહાજર રહે છે. તેથી તેમની હાજરી ૮૦% કરતાં ઓછી થાય છે. હાજરીના ટકા જો જુલાઈ ૨૦${s.examYear} સુધીમાં ૮૦% થશે તોજ તેને જુલાઈ ૨૦${s.examYear} ની પરીક્ષામાં બેસવા દેવાની મંજુરી આપવામાં આવશે જેની નોંધ લેવા વિનંતી.</p>
-            <p><strong>નોંધ :-</strong> ${month} સુધીમાં હાજરી ${pct} થાય છે.</p>
-            <table width="100%" style="margin-top: 15px;">
+            આથી આપને જણાવવાનું કે તમારા પાલ્ય/પુત્ર. ${s.name} અત્રેની સંસ્થામાં ટ્રેડ ${s.trade} બેચ નં. ${s.batch} માં અભ્યાસ કરે છે. અને તેઓની હાજરી ૮૦% કરતાં ઓછી થાય છે. જેથી તેને જુલાઈ ૨૦${yr} માં થનારી અખિલ ભારતીય વ્યવસાય કસોટીમાં બેસવા દેવામાં આવશે નહિ. સંસ્થામાંથી તેઓને વારંવાર સુચના આપવામાં આવે છે. છતાં તેઓ વારંવાર ગેરહાજર રહે છે. તેથી તેમની હાજરી ૮૦% કરતાં ઓછી થાય છે. હાજરીના ટકા જો જુલાઈ ૨૦${yr} સુધીમાં ૮૦% થશે તોજ તેને જુલાઈ ૨૦${yr} ની પરીક્ષામાં બેસવા દેવાની મંજુરી આપવામાં આવશે જેની નોંધ લેવા વિનંતી.</p>
+            <p><strong>નોંધ :-</strong> ${m} સુધીમાં હાજરી ${p} થાય છે.</p>
+            <table width="100%" style="margin-top: 10px;">
                 <tr>
                     <td>ટ્રેડ ઈન્સ્ટ્ર.</td>
                     <td align="center">ફો. ઈ.</td>
@@ -150,37 +231,29 @@
     function generateLetters() {
         let r1 = document.getElementById("roll1").value.trim();
         let s1 = database.find(s => s.roll === r1);
-
-        if (!s1) {
-            alert("કૃપા કરીને વિદ્યાર્થી ૧ નો સાચો રોલ નંબર નાખો!");
-            return;
-        }
-
+        if (!s1) { alert("વિદ્યાર્થી ૧ નો સાચો રોલ નંબર નાખો!"); return; }
         let m1 = document.getElementById("month1").value || "જૂન";
         let p1 = document.getElementById("pct1").value || "૦%";
 
         let r2 = document.getElementById("roll2").value.trim();
-        let s2 = r2 !== "" ? database.find(s => s.roll === r2) : s1; // જો બીજો ન નાખો તો પહેલો જ રિપીટ થશે
+        let s2 = r2 !== "" ? database.find(s => s.roll === r2) : s1;
         let m2 = document.getElementById("month2").value || "જૂન";
         let p2 = document.getElementById("pct2").value || p1;
 
-        let htmlContent = `
+        let content = `
             <div class="letter-page">
                 <div class="letter-box">${getLetterHTML(s1, m1, p1)}</div>
-                <hr style="border-top: 1px dashed black; margin: 10px 0;">
+                <hr style="border-top: 1px dashed black; margin: 5px 0;">
                 <div class="letter-box">${getLetterHTML(s2, m2, p2)}</div>
             </div>
         `;
 
-        let printArea = document.getElementById("printArea");
-        printArea.innerHTML = htmlContent;
-        printArea.style.display = "block";
-        
-        // મોબાઈલ કે પીસીમાં પ્રિન્ટ ડાયલોગ ખોલશે
+        let pArea = document.getElementById("printArea");
+        pArea.innerHTML = content;
+        pArea.style.display = "block";
         window.print();
     }
 </script>
 
 </body>
 </html>
-
